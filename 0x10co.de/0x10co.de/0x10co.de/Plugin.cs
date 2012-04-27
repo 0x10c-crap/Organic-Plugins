@@ -61,10 +61,10 @@ namespace _0x10co.de
             string encodedCode = "";
             while (code.Length != 0)
             {
-                if (code.Length > 1000)
+                if (code.Length > 10000)
                 {
-                    encodedCode += Uri.EscapeDataString(code.Remove(1000));
-                    code = code.Remove(1000);
+                    encodedCode += Uri.EscapeDataString(code.Remove(10000));
+                    code = code.Remove(10000);
                 }
                 else
                 {
@@ -72,6 +72,8 @@ namespace _0x10co.de
                     code = "";
                 }
             }
+            using (StreamWriter writer = new StreamWriter("test.txt"))
+                writer.Write(encodedCode);
             string postData = "title=" + Uri.EscapeDataString(e.Output.First().FileName) + "&author=&description=Created+by+the+0x10co.de+.orgASM+plugin&password=&code=" + encodedCode;
             byte[] data = Encoding.ASCII.GetBytes(postData);
             hwr.ContentLength = data.Length;
