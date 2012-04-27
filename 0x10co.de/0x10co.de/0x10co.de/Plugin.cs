@@ -58,7 +58,21 @@ namespace _0x10co.de
             HttpWebRequest hwr = (HttpWebRequest)WebRequest.Create(new Uri("http://0x10co.de"));
             hwr.ContentType = "application/x-www-form-urlencoded";
             hwr.Method = "POST";
-            string postData = "title=" + Uri.EscapeDataString(e.Output.First().FileName) + "&author=&description=Created+by+the+0x10co.de+.orgASM+plugin&password=&code=" + Uri.EscapeDataString(code);
+            string encodedCode = "";
+            while (code.Length != 0)
+            {
+                if (code.Length > 1000)
+                {
+                    encodedCode += Uri.EscapeDataString(code.Remove(1000));
+                    code = code.Remove(1000);
+                }
+                else
+                {
+                    encodedCode += Uri.EscapeDataString(code);
+                    code = "";
+                }
+            }
+            string postData = "title=" + Uri.EscapeDataString(e.Output.First().FileName) + "&author=&description=Created+by+the+0x10co.de+.orgASM+plugin&password=&code=" + encodedCode;
             byte[] data = Encoding.ASCII.GetBytes(postData);
             hwr.ContentLength = data.Length;
             Stream s = hwr.GetRequestStream();
