@@ -62,7 +62,7 @@ namespace _0x10co.de
                         string dat = "dat ";
                         foreach (ushort value in entry.Output)
                             dat += "0x" + value.ToString("x") + ",";
-                        dat = dat.Remove(dat.Length - 1) + "\t; " + entry.Code;
+                        dat = dat.Remove(dat.Length - 1) + "\t; " + entry.Code + " (line " + entry.LineNumber + ")";
                         code += dat + "\n";
                     }
                 }
