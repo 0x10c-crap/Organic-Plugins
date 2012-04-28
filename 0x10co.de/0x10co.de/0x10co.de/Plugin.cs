@@ -43,6 +43,8 @@ namespace _0x10co.de
             string code = "; =====Begin file: " + oldFile;
             foreach (var entry in e.Output)
             {
+                if (!entry.Listed)
+                    continue;
                 if (entry.FileName != oldFile)
                 {
                     code += "; =====Begin file: " + entry.FileName + "\n";
