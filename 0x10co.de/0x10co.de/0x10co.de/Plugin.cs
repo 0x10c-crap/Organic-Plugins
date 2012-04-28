@@ -64,7 +64,7 @@ namespace _0x10co.de
                 if (code.Length > 10000)
                 {
                     encodedCode += Uri.EscapeDataString(code.Remove(10000));
-                    code = code.Remove(10000);
+                    code = code.Substring(10000);
                 }
                 else
                 {
