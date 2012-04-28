@@ -39,22 +39,29 @@ namespace _0x10co.de
             if (!upload || e.Output.Count == 0)
                 return;
             Console.WriteLine("Uploading output to 0x10co.de...");
-            string code = "";
+            string oldFile = e.Output[0].FileName;
+            string code = "; =====Begin file: " + oldFile;
             foreach (var entry in e.Output)
             {
-                if (entry.Output == null)
+                if (entry.FileName != oldFile)
                 {
-                    code += "; " + entry.Code + "\n";
+                    code += "; =====Begin file: " + entry.FileName + "\n";
+                    oldFile = entry.FileName;
                 }
+                if (entry.ErrorCode != ErrorCode.Success)
+                    code += "; ERROR: " + ListEntry.GetFriendlyErrorMessage(entry.ErrorCode) + "\n";
+                if (entry.WarningCode != WarningCode.None)
+                    code += "; WARNING: " + ListEntry.GetFriendlyWarningMessage(entry.WarningCode) + "\n";
+
+                if (entry.Output == null)
+                    code += "; " + entry.Code + "\n";
                 else
                 {
                     if (entry.Output.Length != 0)
                     {
                         string dat = "dat ";
                         foreach (ushort value in entry.Output)
-                        {
                             dat += "0x" + value.ToString("x") + ",";
-                        }
                         dat = dat.Remove(dat.Length - 1) + "\t; " + entry.Code;
                         code += dat + "\n";
                     }
