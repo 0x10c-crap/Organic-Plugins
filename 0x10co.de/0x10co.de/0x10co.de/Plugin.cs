@@ -43,16 +43,21 @@ namespace _0x10co.de
             foreach (var entry in e.Output)
             {
                 if (entry.Output == null)
-                    continue;
-                if (entry.Output.Length != 0)
                 {
-                    string dat = "dat ";
-                    foreach (ushort value in entry.Output)
+                    code += "; " + entry.Code + "\n";
+                }
+                else
+                {
+                    if (entry.Output.Length != 0)
                     {
-                        dat += "0x" + value.ToString("x") + ",";
+                        string dat = "dat ";
+                        foreach (ushort value in entry.Output)
+                        {
+                            dat += "0x" + value.ToString("x") + ",";
+                        }
+                        dat = dat.Remove(dat.Length - 1) + "\t; " + entry.Code;
+                        code += dat + "\n";
                     }
-                    dat = dat.Remove(dat.Length - 1) + "\t; " + entry.Code;
-                    code += dat + "\n";
                 }
             }
             HttpWebRequest hwr = (HttpWebRequest)WebRequest.Create(new Uri("http://0x10co.de"));
