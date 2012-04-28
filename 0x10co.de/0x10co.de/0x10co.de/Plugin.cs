@@ -31,6 +31,8 @@ namespace _0x10co.de
         {
             if (e.Parameter == "--0x10co.de")
                 e.Handled = upload = true;
+            //if (e.Parameter == "--dat-dump")
+            //    e.Handled = true;
         }
 
         void assembler_AssemblyComplete(object sender, AssemblyCompleteEventArgs e)
@@ -40,7 +42,28 @@ namespace _0x10co.de
                 return;
             Console.WriteLine("Uploading output to 0x10co.de...");
             string oldFile = e.Output[0].FileName;
-            string code = "; =====Begin file: " + oldFile;
+            string code = "; =====Begin file: " + oldFile + "\n";
+
+            // Get longest dat entry
+            int maxLength = 0;
+            foreach (var entry in e.Output)
+            {
+                if (!entry.Listed)
+                    continue;
+                if (entry.Output != null)
+                {
+                    if (entry.Output.Length != 0)
+                    {
+                        string dat = "dat ";
+                        foreach (ushort value in entry.Output)
+                            dat += "0x" + value.ToString("x") + ",";
+                        dat = dat.Remove(dat.Length - 1);
+                        if (dat.Length > maxLength && dat.Length < 30)
+                            maxLength = dat.Length;
+                    }
+                }
+            }
+
             foreach (var entry in e.Output)
             {
                 if (!entry.Listed)
@@ -56,16 +79,19 @@ namespace _0x10co.de
                     code += "; WARNING: " + ListEntry.GetFriendlyWarningMessage(entry.WarningCode) + "\n";
 
                 if (entry.Output == null)
-                    code += "; " + entry.Code + "\n";
+                    code += "; " + entry.Code + " (line " + entry.LineNumber + ")" + "\n";
                 else
                 {
                     if (entry.Output.Length != 0)
                     {
+                        TabifiedStringBuilder tsb = new TabifiedStringBuilder();
                         string dat = "dat ";
                         foreach (ushort value in entry.Output)
                             dat += "0x" + value.ToString("x") + ",";
-                        dat = dat.Remove(dat.Length - 1) + "\t; " + entry.Code + " (line " + entry.LineNumber + ")";
-                        code += dat + "\n";
+                        dat = dat.Remove(dat.Length - 1);
+                        tsb.WriteAt(0, dat);
+                        tsb.WriteAt(maxLength, "; " + entry.Code);
+                        code += tsb.Value + "\n";
                     }
                 }
             }
@@ -86,8 +112,6 @@ namespace _0x10co.de
                     code = "";
                 }
             }
-            using (StreamWriter writer = new StreamWriter("test.txt"))
-                writer.Write(encodedCode);
             string postData = "title=" + Uri.EscapeDataString(e.Output.First().FileName) + "&author=&description=Created+by+the+0x10co.de+.orgASM+plugin&password=&code=" + encodedCode;
             byte[] data = Encoding.ASCII.GetBytes(postData);
             hwr.ContentLength = data.Length;
