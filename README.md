@@ -1,9 +1,11 @@
-.orgASM-Plugins
+Organic-Plugins
 ===============
 
-This repository contains the source code for several useful .orgASM plugins, and the repository is (will be) visible from the plugin installer.  Here's a list of plugins and what they do:
+This repository contains the source code for several useful Organic plugins, and the repository is (will be) visible from the plugin installer.  Here's a list of plugins and what they do:
 
-* **0x10co.de**: This plugin allows you to automatically upload .orgASM output to 0x10co.de.
+* **0x10co.de**: This plugin allows you to automatically upload Organic output to 0x10co.de.
+
+**Note:** Plugins for Organic are still experiemental, and your milage may vary.
 
 Submitting Plugins
 ------------------

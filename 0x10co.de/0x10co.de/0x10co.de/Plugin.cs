@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using orgASM.Plugins;
-using orgASM;
+using Organic.Plugins;
+using Organic;
 using System.Net;
 using System.IO;
 using System.Windows.Forms;
@@ -112,7 +112,7 @@ namespace _0x10co.de
                     code = "";
                 }
             }
-            string postData = "title=" + Uri.EscapeDataString(e.Output.First().FileName) + "&author=&description=Created+by+the+0x10co.de+.orgASM+plugin&password=&code=" + encodedCode;
+            string postData = "title=" + Uri.EscapeDataString(e.Output.First().FileName) + "&author=&description=Created+by+the+0x10co.de+Organic+plugin&password=&code=" + encodedCode;
             byte[] data = Encoding.ASCII.GetBytes(postData);
             hwr.ContentLength = data.Length;
             Stream s = hwr.GetRequestStream();
