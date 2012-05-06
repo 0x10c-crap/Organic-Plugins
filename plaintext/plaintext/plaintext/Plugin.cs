@@ -4,7 +4,6 @@ using Organic.Plugins;
 using Organic;
 using System.IO;
 
-
 namespace _plaintext
 {
     public class Plugin : IPlugin
@@ -13,7 +12,6 @@ namespace _plaintext
         {
             get { return "Outputs a plain text result of preproccessing"; }
         }
-
         
         private bool output;
         private string plaintextFile;
@@ -38,7 +36,7 @@ namespace _plaintext
 
         void assembler_AssemblyComplete(object sender, AssemblyCompleteEventArgs e)
         {
-            // uploads a .dat file
+            // Creates a .dat file
             if (!output || e.Output.Count == 0)
                 return;
             Console.WriteLine("Outputing to text file");
@@ -99,7 +97,6 @@ namespace _plaintext
             StreamWriter file = new StreamWriter(plaintextFile);
             file.Write(code);
             file.Close();
-
         }
 
         public string Name
