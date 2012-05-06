@@ -10,7 +10,7 @@ namespace _plaintext
     {
         public string Description
         {
-            get { return "Outputs a plain text result of preproccessing"; }
+            get { return "Outputs a the result of assembly as DAT directives."; }
         }
         
         private bool output;
@@ -21,14 +21,14 @@ namespace _plaintext
             assembler.AssemblyComplete += new EventHandler<AssemblyCompleteEventArgs>(assembler_AssemblyComplete);
             assembler.TryHandleParameter += new EventHandler<HandleParameterEventArgs>(assembler_TryHandleParameter);
             assembler.AddHelpEntry("plaintext\n" +
-                "\t--plaintext: Outputs a plain text result of preproccessing");
+                "\t--plaintext: Outputs the result of assembly as DAT directives.");
         }
 
         void assembler_TryHandleParameter(object sender, HandleParameterEventArgs e)
         {
             if (e.Parameter == "--plaintext")
             {
-                plaintextFile = e.Arguments[--e.Index];
+                plaintextFile = e.Arguments[++e.Index];
                 Console.WriteLine(plaintextFile);
                 e.Handled = output = true;
             }
