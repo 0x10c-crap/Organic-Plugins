@@ -7,7 +7,10 @@ This repository contains the source code for several useful Organic plugins, and
 
 * **plaintext**: This plugin will output the result of assembly to a plaintext file of DAT directives for use in other assemblers.
 
-**Note:** Plugins for Organic are still experiemental, and your milage may vary.
+Installing Plugins
+------------------
+
+To install a plugin, simply run "organic.exe --install [plugin name]".  If you wish to do a manual install, simply provide the plugin DLL in the same directory as Organic.
 
 Submitting Plugins
 ------------------
