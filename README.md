@@ -5,6 +5,8 @@ This repository contains the source code for several useful Organic plugins, and
 
 * **0x10co.de**: This plugin allows you to automatically upload Organic output to 0x10co.de.
 
+* **llvm**: Adds support for llvm-dcpu16 directives and assembly.
+
 * **plaintext**: This plugin will output the result of assembly to a plaintext file of DAT directives for use in other assemblers.
 
 **Note:** Plugins for Organic are still experiemental, and your milage may vary.
