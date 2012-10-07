@@ -1,0 +1,12 @@
+Each portion of the test file is length-prefixed with a four byte integer.  The endianness is determined
+by the host system, usually little-endian.
+
+The first portion of the file is an ASCII list of unit test information.  Each entry is as follows:
+ASSEMBLER [name]: The name of the assembler that created this.  Organic is "ORGANIC".
+PREREQ [name]: Defines the start of a prereq section.  The default section is NONE.
+TEST [address]-[endaddress] [name]: Defines a test section
+ASSERT [address] [expression]: Assertion statement
+
+The next section is binary data.  The data is the output from assembly, in big-endian.
+
+The last section is an ASCII listing that continues to the end of the file.

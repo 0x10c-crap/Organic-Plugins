@@ -2,4 +2,5 @@
 <plugins>
     <plugin name="0x10co.de" description="Uploads output to 0x10co.de" version="1.0" url="https://github.com/downloads/SirCmpwn/Organic-Plugins/0x10co.de.dll" />
     <plugin name="plaintext" description="Outputs a the result of assembly as DAT directives." version="1.0" url="https://github.com/downloads/SirCmpwn/Organic-Plugins/plaintext.dll" />
+    <plugin name="llvm" description="Adds support for llvm-dcpu16 directives and assembly." version="1.0" url="https://github.com/downloads/SirCmpwn/Organic-Plugins/llvm.dll" />
 </plugins>
