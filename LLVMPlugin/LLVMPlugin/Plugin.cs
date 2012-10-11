@@ -30,22 +30,26 @@ namespace LLVMPlugin
             {
                 e.Handled = true;
                 e.Output.CodeType = CodeType.Directive;
+                e.Output.Output = new ushort[0];
             }
             if (e.Code.StartsWith(".globl"))
             {
                 e.Handled = true;
                 e.Output.CodeType = CodeType.Directive;
+                e.Output.Output = new ushort[0];
             }
             if (e.Code == ".data")
             {
                 e.Handled = true;
                 e.Output.CodeType = CodeType.Directive;
+                e.Output.Output = new ushort[0];
             }
             if (e.Code.StartsWith(".short "))
             {
                 var expression = assembler.ParseExpression(e.Code.Substring(7)); // TODO: Postpone evalulation?
                 e.Output.Output = new[] { expression.Value };
                 e.Output.CodeType = CodeType.Directive;
+                e.Handled = true;
             }
         }
 
