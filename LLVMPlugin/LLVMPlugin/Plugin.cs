@@ -51,6 +51,17 @@ namespace LLVMPlugin
                 e.Output.CodeType = CodeType.Directive;
                 e.Handled = true;
             }
+            if (e.Code.StartsWith(".byte "))
+            {
+                var expression = assembler.ParseExpression(e.Code.Substring(5));
+                e.Output.Output = new[] { expression.Value };
+                e.Output.CodeType = CodeType.Directive;
+                e.Handled = true;
+            }
+            if (e.Code.StartsWith(".comm "))
+            {
+                e.Code = e.Code.Replace(".comm", ".equ").Replace(",", " ");
+            }
         }
 
         public string Name
